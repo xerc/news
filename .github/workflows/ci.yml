@@ -39,6 +39,8 @@ jobs:
 
       - name: Install composer dependencies
         run: |
+          composer require typo3/minimal:^10.4
+          composer require typo3/testing-framework:^5
           composer install --no-progress
 
       - name: Unit tests

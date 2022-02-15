@@ -70,7 +70,7 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
         $node->setSelectable(!GeneralUtility::inList(
             $this->getNonSelectableLevelList(),
             $level
-        ) && !in_array($basicNode->getId(), $this->getItemUnselectableList()));
+        ) && !\in_array($basicNode->getId(), $this->getItemUnselectableList()));
         $node->setSortValue($this->nodeSortValues[$basicNode->getId()]);
         $node->setIcon($iconFactory->getIconForRecord($this->tableName, $row, Icon::SIZE_SMALL));
         $node->setParentNode($parent);
@@ -83,7 +83,7 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
                 if ($restriction || $this->isCategoryAllowed($child)) {
                     $returnedChild = $this->buildRepresentationForNode($child, $node, $level + 1, true);
 
-                    if (!is_null($returnedChild)) {
+                    if (!\is_null($returnedChild)) {
                         $foundSomeChild = true;
                         $childNodes->append($returnedChild);
                     } else {
@@ -114,7 +114,7 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
             return true;
         }
 
-        return in_array($child->getId(), $mounts);
+        return \in_array($child->getId(), $mounts);
     }
 
     /**
@@ -126,7 +126,7 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
     protected function isSingleCategoryAclActivated(): bool
     {
         $userTsConfig = $GLOBALS['BE_USER']->getTSConfig();
-        if (is_array($userTsConfig['tx_news.'])
+        if (\is_array($userTsConfig['tx_news.'])
             && $userTsConfig['tx_news.']['singleCategoryAcl'] === '1'
         ) {
             return true;

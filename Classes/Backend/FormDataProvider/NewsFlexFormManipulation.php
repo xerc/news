@@ -148,7 +148,7 @@ class NewsFlexFormManipulation implements FormDataProviderInterface
         if ($result['tableName'] === 'tt_content'
             && $result['databaseRow']['CType'] === 'list'
             && $result['databaseRow']['list_type'] === 'news_pi1'
-            && is_array($result['processedTca']['columns']['pi_flexform']['config']['ds'])
+            && \is_array($result['processedTca']['columns']['pi_flexform']['config']['ds'])
         ) {
             $result = $this->updateFlexForms($result);
             if ($this->enabledInTsConfig($result)) {
@@ -173,8 +173,8 @@ class NewsFlexFormManipulation implements FormDataProviderInterface
 
         // get the first selected action
         $flexformSelection = $row['pi_flexform'];
-        if (is_array($flexformSelection)
-            && is_array($flexformSelection['data'])
+        if (\is_array($flexformSelection)
+            && \is_array($flexformSelection['data'])
             && !empty($flexformSelection['data']['sDEF']['lDEF']['switchableControllerActions']['vDEF'])
         ) {
             $selectedView = $flexformSelection['data']['sDEF']['lDEF']['switchableControllerActions']['vDEF'];

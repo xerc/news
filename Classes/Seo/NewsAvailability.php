@@ -55,7 +55,7 @@ class NewsAvailability
         if ($language->getFallbackType() === 'strict') {
             $newsRecord = $this->getNewsRecord($newsId, $language->getLanguageId());
 
-            if (!is_array($newsRecord) || empty($newsRecord)) {
+            if (!\is_array($newsRecord) || empty($newsRecord)) {
                 return false;
             }
         }

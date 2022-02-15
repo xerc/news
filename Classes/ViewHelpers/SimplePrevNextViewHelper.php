@@ -141,19 +141,19 @@ class SimplePrevNextViewHelper extends AbstractViewHelper
         /** @var LanguageAspect $languageAspect */
         $languageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
 
-        if (isset($GLOBALS['TSFE']) && is_object($GLOBALS['TSFE']) && $languageAspect->getContentId() > 0) {
+        if (isset($GLOBALS['TSFE']) && \is_object($GLOBALS['TSFE']) && $languageAspect->getContentId() > 0) {
             $overlay = $GLOBALS['TSFE']->sys_page->getRecordOverlay(
                 'tx_news_domain_model_news',
                 $rawRecord,
                 $languageAspect->getContentId(),
                 $languageAspect->getLegacyOverlayType()
             );
-            if (!is_null($overlay)) {
+            if (!\is_null($overlay)) {
                 $rawRecord = $overlay;
             }
         }
 
-        if (is_array($rawRecord)) {
+        if (\is_array($rawRecord)) {
             $records = $this->dataMapper->map(News::class, [$rawRecord]);
             $record = array_shift($records);
         }
@@ -214,7 +214,7 @@ class SimplePrevNextViewHelper extends AbstractViewHelper
                 ->setMaxResults(1)
                 ->orderBy($sortField, ($label === 'prev' ? 'desc' : 'asc'))
                 ->execute()->fetch();
-            if (is_array($row)) {
+            if (\is_array($row)) {
                 $data[$label] = $row;
             }
         }

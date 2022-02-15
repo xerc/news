@@ -41,7 +41,7 @@ class AccessControlService
         }
 
         // If there are any categories with denied access, the user has no permission
-        if (count(self::getAccessDeniedCategories($newsRecord))) {
+        if (\count(self::getAccessDeniedCategories($newsRecord))) {
             return false;
         }
 
@@ -77,7 +77,7 @@ class AccessControlService
 
         // Remove categories the user has access to
         foreach ($newsRecordCategories as $key => $newsRecordCategory) {
-            if (in_array($newsRecordCategory['uid'], $backendUserCategories)) {
+            if (\in_array($newsRecordCategory['uid'], $backendUserCategories)) {
                 unset($newsRecordCategories[$key]);
             }
         }

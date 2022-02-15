@@ -87,7 +87,7 @@ class PaginateBodytextViewHelper extends AbstractViewHelper
         $currentPage = $this->arguments['currentPage'];
 
         $parts = GeneralUtility::trimExplode($this->arguments['token'], $this->arguments['object']->getBodytext(), true);
-        $numberOfPages = count($parts);
+        $numberOfPages = \count($parts);
 
         if ($numberOfPages === 1) {
             $result = $parts[0];

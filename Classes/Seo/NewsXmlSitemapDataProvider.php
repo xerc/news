@@ -74,10 +74,10 @@ class NewsXmlSitemapDataProvider extends AbstractXmlSitemapDataProvider
                 foreach ($pids as $pid) {
                     $list = $this->cObj->getTreeList($pid, $recursiveLevel);
                     if ($list) {
-                        $newList = array_merge($newList, explode(',', $list));
+                        $newList = \array_merge($newList, explode(',', $list));
                     }
                 }
-                $pids = array_merge($pids, $newList);
+                $pids = \array_merge($pids, $newList);
             }
 
             $constraints[] = $queryBuilder->expr()->in('pid', $pids);
@@ -228,7 +228,7 @@ class NewsXmlSitemapDataProvider extends AbstractXmlSitemapDataProvider
     protected function getUrlAdditionalParams(array $additionalParams): array
     {
         if (!empty($this->config['url']['additionalGetParameters']) &&
-            is_array($this->config['url']['additionalGetParameters'])) {
+            \is_array($this->config['url']['additionalGetParameters'])) {
             foreach ($this->config['url']['additionalGetParameters'] as $extension => $extensionConfig) {
                 foreach ($extensionConfig as $key => $value) {
                     $additionalParams[$extension . '[' . $key . ']'] = $value;

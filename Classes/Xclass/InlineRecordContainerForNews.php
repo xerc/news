@@ -45,7 +45,7 @@ class InlineRecordContainerForNews extends InlineRecordContainer
 
         $raw = BackendUtility::getRecord('tt_content', $rec['uid']);
         $renderFallback = true;
-        if (is_array($raw) && !empty($raw) && $raw['CType'] !== 'gridelements_pi1') {
+        if (\is_array($raw) && !empty($raw) && $raw['CType'] !== 'gridelements_pi1') {
             $renderFallback = false;
             $pageLayoutView = GeneralUtility::makeInstance(PageLayoutView::class);
             $pageLayoutView->doEdit = false;

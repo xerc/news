@@ -108,7 +108,7 @@ class AbstractImportService implements LoggerAwareInterface
         $file = null;
 
         $files = $this->getFileIndexRepository()->findByContentHash($hash);
-        if (count($files)) {
+        if (\count($files)) {
             foreach ($files as $fileInfo) {
                 if ($fileInfo['storage'] > 0) {
                     $file = $this->getResourceFactory()->getFileObjectByStorageAndIdentifier(

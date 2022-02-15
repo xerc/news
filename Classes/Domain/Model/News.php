@@ -519,7 +519,7 @@ class News extends AbstractEntity
     public function getFirstCategory(): ?Category
     {
         $categories = $this->getCategories();
-        if (!is_null($categories) && $categories->count() > 0) {
+        if (!\is_null($categories) && $categories->count() > 0) {
             $categories->rewind();
             return $categories->current();
         }
@@ -608,16 +608,16 @@ class News extends AbstractEntity
         $all = [];
         $itemsRelated = $this->getRelated();
         if ($itemsRelated) {
-            $all = array_merge($all, $itemsRelated->toArray());
+            $all = \array_merge($all, $itemsRelated->toArray());
         }
 
         $itemsRelatedFrom = $this->getRelatedFrom();
         if ($itemsRelatedFrom) {
-            $all = array_merge($all, $itemsRelatedFrom->toArray());
+            $all = \array_merge($all, $itemsRelatedFrom->toArray());
         }
-        $all = array_unique($all);
+        $all = \array_unique($all);
 
-        if (count($all) > 0) {
+        if (\count($all) > 0) {
             usort($all, function ($a, $b) {
                 return $a->getDatetime() < $b->getDatetime();
             });
@@ -930,7 +930,7 @@ class News extends AbstractEntity
             foreach ($this->getFalMedia() as $mediaItem) {
                 /** @var FileReference $mediaItem */
                 $configuration = (int)$mediaItem->getOriginalResource()->getProperty('showinpreview');
-                if (in_array($configuration, $list, true)) {
+                if (\in_array($configuration, $list, true)) {
                     $items[] = $mediaItem;
                 }
             }

@@ -38,7 +38,7 @@ class Validation
         foreach ($fields as $field) {
             if ($isValid === true) {
                 $split = GeneralUtility::trimExplode(' ', $field, true);
-                $count = count($split);
+                $count = \count($split);
                 switch ($count) {
                     case 1:
                         if (!GeneralUtility::inList($allowedSettings, $split[0])) {

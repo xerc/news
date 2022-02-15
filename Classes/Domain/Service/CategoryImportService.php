@@ -49,7 +49,7 @@ class CategoryImportService extends AbstractImportService
      */
     public function import(array $importArray): void
     {
-        $this->logger->info(sprintf('Starting import for %s categories', count($importArray)));
+        $this->logger->info(sprintf('Starting import for %s categories', \count($importArray)));
 
         // Sort import array to import the default language first
         foreach ($importArray as $importItem) {
@@ -112,7 +112,7 @@ class CategoryImportService extends AbstractImportService
             $importItem['import_id']
         ));
 
-        if (is_null($category)) {
+        if (\is_null($category)) {
             $this->logger->info('Category is new');
 
             $category = GeneralUtility::makeInstance(Category::class);
@@ -168,7 +168,7 @@ class CategoryImportService extends AbstractImportService
 
         // new image found check if this isn't already
         $existingImages = $category->getImages();
-        if (!is_null($existingImages) && $existingImages->count() !== 0) {
+        if (!\is_null($existingImages) && $existingImages->count() !== 0) {
             /** @var $item FileReference */
             foreach ($existingImages as $item) {
                 // only check already persisted items
@@ -219,7 +219,7 @@ class CategoryImportService extends AbstractImportService
         $category = $queueItem['category'];
         $parentCategoryOriginUid = $queueItem['parentCategoryOriginUid'];
 
-        if (is_null($parentCategory = $this->postPersistQueue[$parentCategoryOriginUid]['category'])) {
+        if (\is_null($parentCategory = $this->postPersistQueue[$parentCategoryOriginUid]['category'])) {
             $parentCategory = $this->categoryRepository->findOneByImportSourceAndImportId(
                 $category->getImportSource(),
                 $parentCategoryOriginUid

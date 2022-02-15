@@ -105,7 +105,7 @@ class NewsController extends NewsBaseController
             $this->request->setFormat($this->settings['format']);
         }
         // Only do this in Frontend Context
-        if (!empty($GLOBALS['TSFE']) && is_object($GLOBALS['TSFE'])) {
+        if (!empty($GLOBALS['TSFE']) && \is_object($GLOBALS['TSFE'])) {
             // We only want to set the tag once in one request, so we have to cache that statically if it has been done
             static $cacheTagsSet = false;
 
@@ -203,11 +203,11 @@ class NewsController extends NewsBaseController
         }
 
         foreach ($overwriteDemand as $propertyName => $propertyValue) {
-            if (in_array(strtolower($propertyName), $this->ignoredSettingsForOverride, true)) {
+            if (\in_array(strtolower($propertyName), $this->ignoredSettingsForOverride, true)) {
                 continue;
             }
             if ($propertyValue !== '' || $this->settings['allowEmptyStringsForOverwriteDemand']) {
-                if (in_array($propertyName, ['categories'], true)) {
+                if (\in_array($propertyName, ['categories'], true)) {
                     $propertyValue = GeneralUtility::trimExplode(',', $propertyValue, true);
                 }
                 ObjectAccess::setProperty($demand, $propertyName, $propertyValue);
@@ -267,7 +267,7 @@ class NewsController extends NewsBaseController
 
         if ($demand->getCategories() !== '') {
             $categoriesList = $demand->getCategories();
-            if (is_string($categoriesList)) {
+            if (\is_string($categoriesList)) {
                 $categoriesList = GeneralUtility::trimExplode(',', $categoriesList);
             }
             if (!empty($categoriesList)) {
@@ -277,7 +277,7 @@ class NewsController extends NewsBaseController
 
         if ($demand->getTags() !== '') {
             $tagList = $demand->getTags();
-            if (!is_array($tagList)) {
+            if (!\is_array($tagList)) {
                 $tagList = GeneralUtility::trimExplode(',', $tagList);
             }
             if (!empty($tagList)) {
@@ -444,7 +444,7 @@ class NewsController extends NewsBaseController
             ),
             true
         );
-        if (count($allowedStoragePages) > 0 && !in_array($news->getPid(), $allowedStoragePages)) {
+        if (\count($allowedStoragePages) > 0 && !\count($news->getPid(), $allowedStoragePages)) {
             $this->eventDispatcher->dispatch(new NewsCheckPidOfNewsRecordFailedInDetailActionEvent($this, $news));
             $news = null;
         }
@@ -536,7 +536,7 @@ class NewsController extends NewsBaseController
             $demand = $this->overwriteDemandObject($demand, $overwriteDemand);
         }
 
-        if (is_null($search)) {
+        if (\is_null($search)) {
             $search = GeneralUtility::makeInstance(Search::class);
         }
         $demand->setSearch($search);
@@ -572,7 +572,7 @@ class NewsController extends NewsBaseController
             $demand = $this->overwriteDemandObject($demand, $overwriteDemand);
         }
 
-        if (!is_null($search)) {
+        if (!\is_null($search)) {
             $search->setFields($this->settings['search']['fields']);
             $search->setDateField($this->settings['dateField']);
             $search->setSplitSubjectWords((bool)$this->settings['search']['splitSearchWord']);
@@ -662,7 +662,7 @@ class NewsController extends NewsBaseController
             $typoScriptArray = $typoScriptService->convertPlainArrayToTypoScriptArray($originalSettings);
             $stdWrapProperties = GeneralUtility::trimExplode(',', $originalSettings['useStdWrap'], true);
             foreach ($stdWrapProperties as $key) {
-                if (is_array($typoScriptArray[$key . '.'])) {
+                if (\is_array($typoScriptArray[$key . '.'])) {
                     $originalSettings[$key] = $this->configurationManager->getContentObject()->stdWrap(
                         $typoScriptArray[$key],
                         $typoScriptArray[$key . '.']

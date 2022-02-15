@@ -49,9 +49,9 @@ class RecordListQueryHook
     ) {
         if ($table === 'tt_content' && $pageId > 0) {
             $pageRecord = BackendUtility::getRecord('pages', $pageId, 'uid', " AND doktype='254' AND module='news'");
-            if (is_array($pageRecord)) {
+            if (\is_array($pageRecord)) {
                 $tsConfig = BackendUtility::getPagesTSconfig($pageId);
-                if (isset($tsConfig['tx_news.']) && is_array($tsConfig['tx_news.']) && $tsConfig['tx_news.']['showContentElementsInNewsSysFolder'] == 1) {
+                if (isset($tsConfig['tx_news.']) && \is_array($tsConfig['tx_news.']) && $tsConfig['tx_news.']['showContentElementsInNewsSysFolder'] == 1) {
                     return;
                 }
 
@@ -64,7 +64,7 @@ class RecordListQueryHook
             }
         } elseif ($table === 'tx_news_domain_model_news' && $this->recordListConstraint->isInAdministrationModule()) {
             $vars = GeneralUtility::_GET('tx_news_web_newsadministration');
-            if (is_array($vars) && is_array($vars['demand'])) {
+            if (\is_array($vars) && \is_array($vars['demand'])) {
                 $vars = $vars['demand'];
                 $this->recordListConstraint->extendQuery($parameters, $vars);
                 if (isset($parameters['orderBy'][0])) {

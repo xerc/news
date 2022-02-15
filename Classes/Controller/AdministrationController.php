@@ -168,7 +168,7 @@ class AdministrationController extends NewsController
         if ($menu instanceof Menu) {
             $this->view->getModuleTemplate()->getDocHeaderComponent()->getMenuRegistry()->addMenu($menu);
         }
-        if (is_array($this->pageInformation)) {
+        if (\is_array($this->pageInformation)) {
             $this->view->getModuleTemplate()->getDocHeaderComponent()->setMetaInformation($this->pageInformation);
         }
     }
@@ -301,8 +301,8 @@ class AdministrationController extends NewsController
             return true;
         }
 
-        $showButton = !in_array($table, $this->deniedNewTables, true) &&
-            (empty($this->allowedNewTables) || in_array($table, $this->allowedNewTables, true));
+        $showButton = !\in_array($table, $this->deniedNewTables, true) &&
+            (empty($this->allowedNewTables) || \in_array($table, $this->allowedNewTables, true));
 
         return $showButton;
     }
@@ -324,7 +324,7 @@ class AdministrationController extends NewsController
         } else {
             // Preselect by TsConfig (e.g. tx_news.module.preselect.topNewsRestriction = 1)
             if (isset($this->tsConfiguration['preselect.'])
-                && is_array($this->tsConfiguration['preselect.'])
+                && \is_array($this->tsConfiguration['preselect.'])
             ) {
                 $anyPropertySet = false;
                 unset($this->tsConfiguration['preselect.']['orderByAllowed']);
@@ -358,7 +358,7 @@ class AdministrationController extends NewsController
         if (!empty($this->tsConfiguration['allowedCategoryRootIds'])) {
             $allowedList = GeneralUtility::intExplode(',', $this->tsConfiguration['allowedCategoryRootIds'], true);
             if (!empty($allowedList)) {
-                $idList = array_intersect($idList, $allowedList);
+                $idList = \array_intersect($idList, $allowedList);
             }
         }
 
@@ -404,7 +404,7 @@ class AdministrationController extends NewsController
             'demand' => $demand,
             'news' => $tableRendering,
             'newsCount' => $counter,
-            'showSearchForm' => (!is_null($demand) || $counter > 0),
+            'showSearchForm' => (!\is_null($demand) || $counter > 0),
             'requestUri' => GeneralUtility::quoteJSvalue(rawurlencode(GeneralUtility::getIndpEnv('REQUEST_URI'))),
             'categories' => $this->categoryRepository->findTree($idList),
             'filters' => $this->tsConfiguration['filters.'],
@@ -514,7 +514,7 @@ class AdministrationController extends NewsController
     {
         $pid = $this->pageUid;
         if ($pid === 0 && isset($this->tsConfiguration['defaultPid.'])
-            && is_array($this->tsConfiguration['defaultPid.'])
+            && \is_array($this->tsConfiguration['defaultPid.'])
             && isset($this->tsConfiguration['defaultPid.'][$table])
         ) {
             $pid = (int)$this->tsConfiguration['defaultPid.'][$table];
@@ -542,7 +542,7 @@ class AdministrationController extends NewsController
     protected function setTsConfig(): void
     {
         $tsConfig = BackendUtilityCore::getPagesTSconfig($this->pageUid);
-        if (isset($tsConfig['tx_news.']['module.']) && is_array($tsConfig['tx_news.']['module.'])) {
+        if (isset($tsConfig['tx_news.']['module.']) && \is_array($tsConfig['tx_news.']['module.'])) {
             $this->tsConfiguration = $tsConfig['tx_news.']['module.'];
         }
     }

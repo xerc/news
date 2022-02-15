@@ -33,7 +33,7 @@ class TypoScript
 
                 $foundInCurrentTs = $this->getValue($base, $keyAsArray);
 
-                if (is_string($foundInCurrentTs) && strlen($foundInCurrentTs) === 0) {
+                if (\is_string($foundInCurrentTs) && strlen($foundInCurrentTs) === 0) {
                     $foundInOriginal = $this->getValue($overload['settings'], $keyAsArray);
                     if ($foundInOriginal) {
                         $base = $this->setValue($base, $keyAsArray, $foundInOriginal);
@@ -62,7 +62,7 @@ class TypoScript
     {
         $found = true;
 
-        for ($x = 0; ($x < count($path) && $found); $x++) {
+        for ($x = 0; ($x < \count($path) && $found); $x++) {
             $key = $path[$x];
 
             if (isset($data[$key])) {
@@ -92,7 +92,7 @@ class TypoScript
     {
         $this->setValueByReference($array, $path, $value);
 
-        $final = array_merge_recursive([], $array);
+        $final = \array_merge_recursive([], $array);
         return $final;
     }
 
@@ -107,7 +107,7 @@ class TypoScript
      */
     private function setValueByReference(array &$array, array $path, $value): void
     {
-        while (count($path) > 1) {
+        while (\count($path) > 1) {
             $key = array_shift($path);
             if (!isset($array[$key])) {
                 $array[$key] = [];

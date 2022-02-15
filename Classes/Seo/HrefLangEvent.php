@@ -60,7 +60,7 @@ class HrefLangEvent
             }
 
             if (!$errorTriggered) {
-                if (count($allHrefLangs) <= 2) {
+                if (\count($allHrefLangs) <= 2) {
                     unset($allHrefLangs['x-default']);
                 }
                 $event->setHrefLangs($allHrefLangs);

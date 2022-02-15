@@ -112,7 +112,7 @@ class NewsImportService extends AbstractImportService
         array $importItemOverwrite
     ): News {
         if (!empty($importItemOverwrite)) {
-            $importItem = array_merge($importItem, $importItemOverwrite);
+            $importItem = \array_merge($importItem, $importItemOverwrite);
         }
         $news->setPid($importItem['pid']);
         $news->setHidden($importItem['hidden']);
@@ -142,7 +142,7 @@ class NewsImportService extends AbstractImportService
 
         $contentElementUidArray = GeneralUtility::trimExplode(',', $importItem['content_elements'], true);
         foreach ($contentElementUidArray as $contentElementUid) {
-            if (is_object($contentElement = $this->ttContentRepository->findByUid($contentElementUid))) {
+            if (\is_object($contentElement = $this->ttContentRepository->findByUid($contentElementUid))) {
                 $news->addContentElement($contentElement);
             }
         }
@@ -158,7 +158,7 @@ class NewsImportService extends AbstractImportService
 
         $news->setPathSegment($importItem['path_segment']);
 
-        if (is_array($importItem['categories'])) {
+        if (\is_array($importItem['categories'])) {
             foreach ($importItem['categories'] as $categoryUid) {
                 if ($this->settings['findCategoriesByImportSource']) {
                     $category = $this->categoryRepository->findOneByImportSourceAndImportId(
@@ -178,7 +178,7 @@ class NewsImportService extends AbstractImportService
         }
 
         // media relation
-        if (is_array($importItem['media'])) {
+        if (\is_array($importItem['media'])) {
             foreach ($importItem['media'] as $mediaItem) {
                 // get fileobject by given identifier (file UID, combined identifier or path/filename)
                 try {
@@ -224,7 +224,7 @@ class NewsImportService extends AbstractImportService
         }
 
         // related files
-        if (is_array($importItem['related_files'])) {
+        if (\is_array($importItem['related_files'])) {
             foreach ($importItem['related_files'] as $fileItem) {
 
                 // get fileObject by given identifier (file UID, combined identifier or path/filename)
@@ -268,7 +268,7 @@ class NewsImportService extends AbstractImportService
             }
         }
 
-        if (is_array($importItem['related_links'])) {
+        if (\is_array($importItem['related_links'])) {
             foreach ($importItem['related_links'] as $link) {
                 /** @var $relatedLink Link */
                 if (($relatedLink = $this->getRelatedLinkIfAlreadyExists($news, $link['uri'])) === false) {
@@ -298,7 +298,7 @@ class NewsImportService extends AbstractImportService
     public function import(array $importData, array $importItemOverwrite = [], $settings = []): void
     {
         $this->settings = $settings;
-        $this->logger->info(sprintf('Starting import for %s news', count($importData)));
+        $this->logger->info(sprintf('Starting import for %s news', \count($importData)));
 
         foreach ($importData as $importItem) {
             $event = $this->eventDispatcher->dispatch(new NewsImportPreHydrateEvent($this, $importItem));

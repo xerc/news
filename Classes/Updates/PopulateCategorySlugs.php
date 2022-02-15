@@ -117,8 +117,8 @@ class PopulateCategorySlugs implements UpgradeWizardInterface
 
         $fieldConfig = $GLOBALS['TCA'][$this->table]['columns'][$this->fieldName]['config'];
         $evalInfo = !empty($fieldConfig['eval']) ? GeneralUtility::trimExplode(',', $fieldConfig['eval'], true) : [];
-        $hasToBeUniqueInSite = in_array('uniqueInSite', $evalInfo, true);
-        $hasToBeUniqueInPid = in_array('uniqueInPid', $evalInfo, true);
+        $hasToBeUniqueInSite = \in_array('uniqueInSite', $evalInfo, true);
+        $hasToBeUniqueInPid = \in_array('uniqueInPid', $evalInfo, true);
         $slugHelper = GeneralUtility::makeInstance(SlugHelper::class, $this->table, $this->fieldName, $fieldConfig);
 
         while ($record = $statement->fetch()) {

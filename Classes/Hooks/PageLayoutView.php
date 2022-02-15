@@ -109,7 +109,7 @@ class PageLayoutView
                 $header .= $this->generateCallout($this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.mode.not_configured'));
             }
 
-            if (is_array($this->flexformData)) {
+            if (\is_array($this->flexformData)) {
                 switch ($actionTranslationKey) {
                     case 'news_list':
                         $this->getStartingPoint();
@@ -204,10 +204,10 @@ class PageLayoutView
         if ($singleNewsRecord > 0) {
             $newsRecord = BackendUtilityCore::getRecord('tx_news_domain_model_news', $singleNewsRecord);
 
-            if (is_array($newsRecord)) {
+            if (\is_array($newsRecord)) {
                 $pageRecord = BackendUtilityCore::getRecord('pages', $newsRecord['pid']);
 
-                if (is_array($pageRecord)) {
+                if (\is_array($pageRecord)) {
                     $content = $this->getRecordData($newsRecord['uid'], 'tx_news_domain_model_news');
                 } else {
                     $text = sprintf(
@@ -290,7 +290,7 @@ class PageLayoutView
     {
         $record = BackendUtilityCore::getRecord($table, $id);
 
-        if (is_array($record)) {
+        if (\is_array($record)) {
             $data = '<span data-toggle="tooltip" data-placement="top" data-title="id=' . $record['uid'] . '">'
                 . $this->iconFactory->getIconForRecord($table, $record, Icon::SIZE_SMALL)->render()
                 . '</span> ';
@@ -398,7 +398,7 @@ class PageLayoutView
     public function getCategorySettings($showCategoryMode = true): void
     {
         $categories = GeneralUtility::intExplode(',', $this->getFieldFromFlexform('settings.categories'), true);
-        if (count($categories) > 0) {
+        if (\count($categories) > 0) {
             $categoriesOut = [];
             foreach ($categories as $id) {
                 $categoriesOut[] = $this->getRecordData($id, 'sys_category');
@@ -418,7 +418,7 @@ class PageLayoutView
                     $categoryMode = $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.categoryConjunction.' . $categoryModeSelection);
                 }
 
-                if (count($categories) > 0 && empty($categoryModeSelection)) {
+                if (\count($categories) > 0 && empty($categoryModeSelection)) {
                     $categoryMode = $this->generateCallout($categoryMode);
                 } else {
                     $categoryMode = htmlspecialchars($categoryMode);
@@ -448,7 +448,7 @@ class PageLayoutView
     public function getTagRestrictionSetting()
     {
         $tags = GeneralUtility::intExplode(',', $this->getFieldFromFlexform('settings.tags', 'additional'), true);
-        if (count($tags) === 0) {
+        if (\count($tags) === 0) {
             return;
         }
 
@@ -693,8 +693,8 @@ class PageLayoutView
         $view->assignMultiple([
             'header' => $header,
             'rows' => [
-                'above' => array_slice($this->tableData, 0, self::SETTINGS_IN_PREVIEW),
-                'below' => array_slice($this->tableData, self::SETTINGS_IN_PREVIEW)
+                'above' => \array_slice($this->tableData, 0, self::SETTINGS_IN_PREVIEW),
+                'below' => \array_slice($this->tableData, self::SETTINGS_IN_PREVIEW)
             ],
             'id' => $recordUid
         ]);

@@ -130,7 +130,7 @@ class RecordListConstraint
         }
 
         // categories
-        if (isset($arguments['selectedCategories']) && is_array($arguments['selectedCategories'])) {
+        if (isset($arguments['selectedCategories']) && \is_array($arguments['selectedCategories'])) {
             $categoryMode = strtolower($arguments['categoryConjunction']);
             foreach ($arguments['selectedCategories'] as $key => $category) {
                 if ((int)$category === 0) {
@@ -190,7 +190,7 @@ class RecordListConstraint
                             $parameters['where'][] = '1=2';
                             $parameters['whereDoctrine'][] = $expressionBuilder->eq('uid', 0);
                         } else {
-                            $orConstraint = array_unique($orConstraint);
+                            $orConstraint = \array_unique($orConstraint);
                             $parameters['where'][] = ' NOT (' . implode(' OR ', $orConstraint) . ')';
                             $parameters['whereDoctrine'][] = $expressionBuilder->andX(...$orConstraintDoctrine);
                         }

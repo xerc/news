@@ -46,7 +46,7 @@ class Cache
     public function isContentRecordAlreadyProcessed(ContentObjectRenderer $cObj): bool
     {
         $key = 'tt_content_' . $cObj->data['uid'];
-        return array_key_exists($key, self::$processedContentRecords);
+        return \array_key_exists($key, self::$processedContentRecords);
     }
 
     /**
@@ -70,7 +70,7 @@ class Cache
                 $cacheTags[] = 'tx_news_uid_' . $news->_getProperty('_localizedUid');
             }
         }
-        if (count($cacheTags) > 0) {
+        if (\count($cacheTags) > 0) {
             $GLOBALS['TSFE']->addCacheTags($cacheTags);
         }
     }
@@ -94,7 +94,7 @@ class Cache
         } else {
             $cacheTags[] = 'tx_news_domain_model_news';
         }
-        if (count($cacheTags) > 0) {
+        if (\count($cacheTags) > 0) {
             $GLOBALS['TSFE']->addCacheTags($cacheTags);
         }
     }

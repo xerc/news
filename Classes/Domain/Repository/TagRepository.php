@@ -37,7 +37,7 @@ class TagRepository extends AbstractDemandedRepository
         $query->getQuerySettings()->setRespectStoragePage(false);
         $query->getQuerySettings()->setRespectSysLanguage(false);
 
-        if (count($ordering) > 0) {
+        if (\count($ordering) > 0) {
             $query->setOrderings($ordering);
         }
 
@@ -80,7 +80,7 @@ class TagRepository extends AbstractDemandedRepository
 
         // Clean not used constraints
         foreach ($constraints as $key => $value) {
-            if (is_null($value)) {
+            if (\is_null($value)) {
                 unset($constraints[$key]);
             }
         }

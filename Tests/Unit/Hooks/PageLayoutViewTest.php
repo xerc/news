@@ -49,7 +49,7 @@ class PageLayoutViewTest extends BaseTestCase
 
         $this->pageLayoutView->_set('flexformData', $flexform);
         $this->pageLayoutView->_call('getArchiveSettings');
-        $this->assertEquals(count($this->pageLayoutView->_get('tableData')), 1);
+        $this->assertEquals(\count($this->pageLayoutView->_get('tableData')), 1);
     }
 
     /**
@@ -64,7 +64,7 @@ class PageLayoutViewTest extends BaseTestCase
 
         $this->pageLayoutView->_set('flexformData', $flexform);
         $this->pageLayoutView->_call('getDetailPidSetting');
-        $this->assertEquals(count($this->pageLayoutView->_get('tableData')), 1);
+        $this->assertEquals(\count($this->pageLayoutView->_get('tableData')), 1);
     }
 
     /**
@@ -79,7 +79,7 @@ class PageLayoutViewTest extends BaseTestCase
 
         $this->pageLayoutView->_set('flexformData', $flexform);
         $this->pageLayoutView->_call('getTagRestrictionSetting');
-        $this->assertEquals(count($this->pageLayoutView->_get('tableData')), 1);
+        $this->assertEquals(\count($this->pageLayoutView->_get('tableData')), 1);
     }
 
     /**
@@ -94,7 +94,7 @@ class PageLayoutViewTest extends BaseTestCase
 
         $this->pageLayoutView->_set('flexformData', $flexform);
         $this->pageLayoutView->_call('getListPidSetting');
-        $this->assertEquals(count($this->pageLayoutView->_get('tableData')), 1);
+        $this->assertEquals(\count($this->pageLayoutView->_get('tableData')), 1);
     }
 
     /**
@@ -109,7 +109,7 @@ class PageLayoutViewTest extends BaseTestCase
 
         $this->pageLayoutView->_set('flexformData', $flexform);
         $this->pageLayoutView->_call('getOrderSettings');
-        $this->assertEquals(count($this->pageLayoutView->_get('tableData')), 1);
+        $this->assertEquals(\count($this->pageLayoutView->_get('tableData')), 1);
     }
 
     /**
@@ -157,22 +157,22 @@ class PageLayoutViewTest extends BaseTestCase
         $this->addContentToFlexform($flexform, 'settings.offset', '1', 'additional');
         $this->pageLayoutView->_set('flexformData', $flexform);
         $this->pageLayoutView->_call('getOffsetLimitSettings');
-        $this->assertEquals(count($this->pageLayoutView->_get('tableData')), 1);
+        $this->assertEquals(\count($this->pageLayoutView->_get('tableData')), 1);
 
         $this->addContentToFlexform($flexform, 'settings.limit', '1', 'additional');
         $this->pageLayoutView->_set('flexformData', $flexform);
         $this->pageLayoutView->_call('getOffsetLimitSettings');
-        $this->assertEquals(count($this->pageLayoutView->_get('tableData')), 2);
+        $this->assertEquals(\count($this->pageLayoutView->_get('tableData')), 2);
 
         $this->addContentToFlexform($flexform, 'settings.hidePagination', '0', 'additional');
         $this->pageLayoutView->_set('flexformData', $flexform);
         $this->pageLayoutView->_call('getOffsetLimitSettings');
-        $this->assertEquals(count($this->pageLayoutView->_get('tableData')), 2);
+        $this->assertEquals(\count($this->pageLayoutView->_get('tableData')), 2);
 
         $this->addContentToFlexform($flexform, 'settings.hidePagination', '1', 'additional');
         $this->pageLayoutView->_set('flexformData', $flexform);
         $this->pageLayoutView->_call('getOffsetLimitSettings');
-        $this->assertEquals(count($this->pageLayoutView->_get('tableData')), 3);
+        $this->assertEquals(\count($this->pageLayoutView->_get('tableData')), 3);
     }
 
     /**
@@ -186,7 +186,7 @@ class PageLayoutViewTest extends BaseTestCase
         $this->addContentToFlexform($flexform, 'settings.dateField', 'field');
         $this->pageLayoutView->_set('flexformData', $flexform);
         $this->pageLayoutView->_call('getDateMenuSettings');
-        $this->assertEquals(count($this->pageLayoutView->_get('tableData')), 1);
+        $this->assertEquals(\count($this->pageLayoutView->_get('tableData')), 1);
     }
 
     /**
@@ -200,12 +200,12 @@ class PageLayoutViewTest extends BaseTestCase
         $this->addContentToFlexform($flexform, 'settings.timeRestriction', 'fo');
         $this->pageLayoutView->_set('flexformData', $flexform);
         $this->pageLayoutView->_call('getTimeRestrictionSetting');
-        $this->assertEquals(count($this->pageLayoutView->_get('tableData')), 1);
+        $this->assertEquals(\count($this->pageLayoutView->_get('tableData')), 1);
 
         $this->addContentToFlexform($flexform, 'settings.timeRestrictionHigh', 'bar');
         $this->pageLayoutView->_set('flexformData', $flexform);
         $this->pageLayoutView->_call('getTimeRestrictionSetting');
-        $this->assertEquals(count($this->pageLayoutView->_get('tableData')), 2);
+        $this->assertEquals(\count($this->pageLayoutView->_get('tableData')), 2);
     }
 
     /**
@@ -225,7 +225,7 @@ class PageLayoutViewTest extends BaseTestCase
         $this->pageLayoutView->_set('templateLayoutsUtility', $mockedTemplateLayout);
 
         $this->pageLayoutView->_call('getTemplateLayoutSettings', 1);
-        $this->assertEquals(count($this->pageLayoutView->_get('tableData')), 1);
+        $this->assertEquals(\count($this->pageLayoutView->_get('tableData')), 1);
     }
 
     /**
@@ -239,7 +239,7 @@ class PageLayoutViewTest extends BaseTestCase
         $this->addContentToFlexform($flexform, 'settings.disableOverrideDemand', '1', 'additional');
         $this->pageLayoutView->_set('flexformData', $flexform);
         $this->pageLayoutView->_call('getOverrideDemandSettings');
-        $this->assertEquals(count($this->pageLayoutView->_get('tableData')), 1);
+        $this->assertEquals(\count($this->pageLayoutView->_get('tableData')), 1);
     }
 
     /**

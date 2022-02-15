@@ -135,8 +135,8 @@ class BackendUtility
     {
         if ($identifier['type'] === 'tca' && $identifier['tableName'] === 'tt_content' && $identifier['dataStructureKey'] === 'news_pi1,list') {
             $getVars = GeneralUtility::_GET('edit');
-            if (isset($getVars['tt_content']) && is_array($getVars['tt_content'])) {
-                $item = array_keys($getVars['tt_content']);
+            if (isset($getVars['tt_content']) && \is_array($getVars['tt_content'])) {
+                $item = \array_keys($getVars['tt_content']);
                 $recordId = (int)$item[0];
 
                 if (($getVars['tt_content'][$recordId] ?? '') === 'new') {
@@ -146,7 +146,7 @@ class BackendUtility
                     $this->updateFlexforms($dataStructure, $fakeRow);
                 } else {
                     $row = BackendUtilityCore::getRecord('tt_content', $recordId);
-                    if (is_array($row)) {
+                    if (\is_array($row)) {
                         $this->updateFlexforms($dataStructure, $row);
                     }
                 }
@@ -170,13 +170,13 @@ class BackendUtility
         $flexformSelection = [];
         if (isset($row['pi_flexform'])) {
             // get the first selected action
-            if (is_string($row['pi_flexform'])) {
+            if (\is_string($row['pi_flexform'])) {
                 $flexformSelection = GeneralUtility::xml2array($row['pi_flexform']);
             } else {
                 $flexformSelection = $row['pi_flexform'];
             }
         }
-        if (is_array($flexformSelection) && isset($flexformSelection['data'])) {
+        if (\is_array($flexformSelection) && isset($flexformSelection['data'])) {
             $selectedView = $flexformSelection['data']['sDEF']['lDEF']['switchableControllerActions']['vDEF'] ?? '';
             if (!empty($selectedView)) {
                 $actionParts = GeneralUtility::trimExplode(';', $selectedView, true);

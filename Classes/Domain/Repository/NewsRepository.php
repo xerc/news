@@ -49,7 +49,7 @@ class NewsRepository extends AbstractDemandedRepository
             return $constraint;
         }
 
-        if (!is_array($categories)) {
+        if (!\is_array($categories)) {
             $categories = GeneralUtility::intExplode(',', $categories, true);
         }
         foreach ($categories as $category) {
@@ -61,7 +61,7 @@ class NewsRepository extends AbstractDemandedRepository
                 );
                 $subCategoryConstraint = [];
                 $subCategoryConstraint[] = $query->contains('categories', $category);
-                if (count($subCategories) > 0) {
+                if (\count($subCategories) > 0) {
                     foreach ($subCategories as $subCategory) {
                         $subCategoryConstraint[] = $query->contains('categories', $subCategory);
                     }
@@ -204,14 +204,14 @@ class NewsRepository extends AbstractDemandedRepository
 
         // Tags
         $tags = $demand->getTags();
-        if ($tags && is_string($tags)) {
+        if ($tags && \is_string($tags)) {
             $tagList = explode(',', $tags);
 
             $subConstraints = [];
             foreach ($tagList as $singleTag) {
                 $subConstraints[] = $query->contains('tags', $singleTag);
             }
-            if (count($subConstraints) > 0) {
+            if (\count($subConstraints) > 0) {
                 $constraints['tags'] = $query->logicalOr($subConstraints);
             }
         }
@@ -376,8 +376,8 @@ class NewsRepository extends AbstractDemandedRepository
 
         $sql = 'SELECT MONTH(FROM_UNIXTIME(0) + INTERVAL ' . $field . ' SECOND ) AS "_Month",' .
             ' YEAR(FROM_UNIXTIME(0) + INTERVAL ' . $field . ' SECOND) AS "_Year" ,' .
-            ' count(MONTH(FROM_UNIXTIME(0) + INTERVAL ' . $field . ' SECOND )) as count_month,' .
-            ' count(YEAR(FROM_UNIXTIME(0) + INTERVAL ' . $field . ' SECOND)) as count_year' .
+            ' \count(MONTH(FROM_UNIXTIME(0) + INTERVAL ' . $field . ' SECOND )) as count_month,' .
+            ' \count(YEAR(FROM_UNIXTIME(0) + INTERVAL ' . $field . ' SECOND)) as count_year' .
             ' FROM tx_news_domain_model_news ' . substr($sql, strpos($sql, 'WHERE '));
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)
@@ -407,7 +407,7 @@ class NewsRepository extends AbstractDemandedRepository
         }
 
         // Add totals
-        if (is_array($data['single'])) {
+        if (\is_array($data['single'])) {
             foreach ($data['single'] as $year => $months) {
                 $countOfYear = 0;
                 foreach ($months as $month) {
@@ -445,7 +445,7 @@ class NewsRepository extends AbstractDemandedRepository
             $searchFields = GeneralUtility::trimExplode(',', $searchObject->getFields(), true);
             $searchConstraints = [];
 
-            if (count($searchFields) === 0) {
+            if (\count($searchFields) === 0) {
                 throw new \UnexpectedValueException('No search fields defined', 1318497755);
             }
             $searchSubjectSplitted = str_getcsv($searchSubject, ' ');
@@ -460,7 +460,7 @@ class NewsRepository extends AbstractDemandedRepository
                     }
                     $searchConstraints[] = $query->logicalAnd($subConstraints);
                 }
-                if (count($searchConstraints)) {
+                if (\count($searchConstraints)) {
                     $constraints[] = $query->logicalOr($searchConstraints);
                 }
             } else {
@@ -469,7 +469,7 @@ class NewsRepository extends AbstractDemandedRepository
                         $searchConstraints[] = $query->like($field, '%' . $searchSubject . '%');
                     }
                 }
-                if (count($searchConstraints)) {
+                if (\count($searchConstraints)) {
                     $constraints[] = $query->logicalOr($searchConstraints);
                 }
             }

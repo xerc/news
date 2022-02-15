@@ -57,7 +57,7 @@ class NewsRowInitializeNew implements FormDataProviderInterface
         }
 
         if (isset($result['pageTsConfig']['tx_news.']['predefine.'])
-            && is_array($result['pageTsConfig']['tx_news.']['predefine.'])
+            && \is_array($result['pageTsConfig']['tx_news.']['predefine.'])
         ) {
             if (isset($result['pageTsConfig']['tx_news.']['predefine.']['author']) && (int)$result['pageTsConfig']['tx_news.']['predefine.']['author'] === 1) {
                 $result['databaseRow']['author'] = $GLOBALS['BE_USER']->user['realName'];

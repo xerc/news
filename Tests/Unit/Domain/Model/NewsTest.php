@@ -399,10 +399,10 @@ class NewsTest extends BaseTestCase
         $mediaItem4->_setProperty('originalResource', $mockedElement4);
         $news->addFalMedia($mediaItem4);
 
-        $this->assertEquals(3, count($news->getMediaPreviews()));
-        $this->assertEquals(3, count($news->getMediaNonPreviews()));
+        $this->assertEquals(3, \count($news->getMediaPreviews()));
+        $this->assertEquals(3, \count($news->getMediaNonPreviews()));
 
-        $this->assertEquals(4, count($news->getFalMedia()));
-        $this->assertEquals(4, count($news->getMedia()));
+        $this->assertEquals(4, \count($news->getFalMedia()));
+        $this->assertEquals(4, \count($news->getMedia()));
     }
 }

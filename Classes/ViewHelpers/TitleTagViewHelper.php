@@ -46,8 +46,8 @@ class TitleTagViewHelper extends AbstractViewHelper implements ViewHelperInterfa
     ): void {
         // Skip if current record is part of tt_content CType shortcut
         if (!empty($GLOBALS['TSFE']->recordRegister)
-            && is_array($GLOBALS['TSFE']->recordRegister)
-            && strpos(array_keys($GLOBALS['TSFE']->recordRegister)[0], 'tt_content:') !== false
+            && \is_array($GLOBALS['TSFE']->recordRegister)
+            && strpos(\array_keys($GLOBALS['TSFE']->recordRegister)[0], 'tt_content:') !== false
             && !empty($GLOBALS['TSFE']->currentRecord)
             && strpos($GLOBALS['TSFE']->currentRecord, 'tx_news_domain_model_news:') !== false
         ) {

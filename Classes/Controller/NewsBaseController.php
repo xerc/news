@@ -41,7 +41,7 @@ class NewsBaseController extends ActionController
     {
         $view->assign('contentObjectData', $this->configurationManager->getContentObject()->data);
         $view->assign('emConfiguration', GeneralUtility::makeInstance(EmConfiguration::class));
-        if (isset($GLOBALS['TSFE']) && is_object($GLOBALS['TSFE'])) {
+        if (isset($GLOBALS['TSFE']) && \is_object($GLOBALS['TSFE'])) {
             $view->assign('pageData', $GLOBALS['TSFE']->page);
         }
         parent::initializeView($view);
@@ -101,7 +101,7 @@ class NewsBaseController extends ActionController
                 $this->redirect('list');
                 break;
             case 'redirectToPage':
-                if (count($options) === 1 || count($options) > 3) {
+                if (\count($options) === 1 || \count($options) > 3) {
                     $msg = sprintf(
                         'If error handling "%s" is used, either 2 or 3 arguments, split by "," must be used',
                         $options[0]

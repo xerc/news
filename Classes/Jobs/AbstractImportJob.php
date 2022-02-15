@@ -80,7 +80,7 @@ abstract class AbstractImportJob implements ImportJobInterface
         $totalRecordCount = (int)$this->importDataProviderService->getTotalRecordCount();
         $info = [
             'totalRecordCount' => $totalRecordCount,
-            'runsToComplete' => $totalRecordCount > 0 ? (ceil($totalRecordCount / $this->getNumberOfRecordsPerRun())) : 0,
+            'runsToComplete' => $totalRecordCount > 0 ? (\ceil($totalRecordCount / $this->getNumberOfRecordsPerRun())) : 0,
             'increaseOffsetPerRunBy' => $this->getNumberOfRecordsPerRun(),
         ];
 

@@ -65,7 +65,7 @@ class ClassParser
         $functionName = '';
         $lastLine = 0;
         foreach ($tokens as $idx => &$token) {
-            if (is_array($token)) {
+            if (\is_array($token)) {
                 switch ($token[0]) {
                     case T_DOC_COMMENT:
                         $doc = $token[1];
@@ -106,7 +106,7 @@ class ClassParser
                                 break;
                             case T_FUNCTION:
                                 $state = self::STATE_FUNCTION_HEAD;
-                                $clsc = count($classes);
+                                $clsc = \count($classes);
                                 if ($depth > 0 && $clsc) {
                                     $inFunction = true;
                                     $functionName = $token[1];
@@ -119,7 +119,7 @@ class ClassParser
                                 break;
                             case T_IMPLEMENTS:
                             case T_EXTENDS:
-                                $clsc = count($classes);
+                                $clsc = \count($classes);
                                 $classes[$clsc - 1][$state == T_IMPLEMENTS ? 'implements' : 'extends'][] = $token[1];
                                 break;
                         }

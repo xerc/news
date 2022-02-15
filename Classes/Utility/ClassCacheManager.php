@@ -96,7 +96,7 @@ class ClassCacheManager
                     $code .= $this->parseSingleFile($path, false);
                 }
             }
-            if (isset($this->constructorLines['code']) && count($this->constructorLines['code'])) {
+            if (isset($this->constructorLines['code']) && \count($this->constructorLines['code'])) {
                 $code .= LF . implode("\n", $this->constructorLines['doc']);
                 $code .= LF . '    public function __construct(' . implode(',', $this->constructorLines['parameters'] ?? []) . ')' . LF . '    {' . LF . implode(LF, $this->constructorLines['code'] ?? []) . LF . '    }' . LF;
             }
@@ -146,13 +146,13 @@ class ClassCacheManager
         } else {
             $offsetForInnerPart = $classParserInformation['start'];
             if (isset($classParserInformation['eol'])) {
-                $innerPart = array_slice(
+                $innerPart = \array_slice(
                     $codeInLines,
                     $classParserInformation['start'],
                     ($classParserInformation['eol'] - $classParserInformation['start'] - 1)
                 );
             } else {
-                $innerPart = array_slice($codeInLines, $classParserInformation['start']);
+                $innerPart = \array_slice($codeInLines, $classParserInformation['start']);
             }
         }
 

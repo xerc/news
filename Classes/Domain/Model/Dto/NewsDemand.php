@@ -556,7 +556,7 @@ class NewsDemand extends AbstractEntity implements DemandInterface
      */
     public function getDateField(): string
     {
-        if (in_array($this->dateField, ['datetime', 'archive'], true)
+        if (\in_array($this->dateField, ['datetime', 'archive'], true)
             || isset($GLOBALS['TCA']['tx_news_domain_model_news']['columns'][$this->dateField])) {
             return $this->dateField;
         }

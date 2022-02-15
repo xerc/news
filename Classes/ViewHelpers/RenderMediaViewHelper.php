@@ -101,7 +101,7 @@ class RenderMediaViewHelper extends AbstractViewHelper
         }
 
         $imageAttributes = array_reduce(
-            array_keys($imageAttributes),
+            \array_keys($imageAttributes),
             function ($carry, $key) use ($imageAttributes) {
                 return $carry . ' ' . $key . '="' . htmlspecialchars($imageAttributes[$key]) . '"';
             },
@@ -133,7 +133,7 @@ class RenderMediaViewHelper extends AbstractViewHelper
             $media = null;
 
             // check if a file is present for current media tag
-            if (count($files) <= $fileIndex) {
+            if (\count($files) <= $fileIndex) {
                 break;
             }
 

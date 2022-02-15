@@ -80,19 +80,19 @@ class ChunkViewHelper extends AbstractViewHelper
             return $output;
         }
         if ($fixed) {
-            $subjectSize = count($subject);
+            $subjectSize = \count($subject);
             if (0 < $subjectSize) {
-                $chunkSize = (int)ceil($subjectSize / $count);
+                $chunkSize = (int)\ceil($subjectSize / $count);
 
-                $output = array_chunk($subject, $chunkSize, $preserveKeys);
+                $output = \array_chunk($subject, $chunkSize, $preserveKeys);
             }
             // Fill the resulting array with empty items to get the desired element count
-            $elementCount = count($output);
+            $elementCount = \count($output);
             if ($elementCount < $count) {
-                $output += array_fill($elementCount, $count - $elementCount, null);
+                $output += \array_fill($elementCount, $count - $elementCount, null);
             }
         } else {
-            $output = array_chunk($subject, $count, $preserveKeys);
+            $output = \array_chunk($subject, $count, $preserveKeys);
         }
 
         return static::renderChildrenWithVariableOrReturnInputStatic(
@@ -119,10 +119,10 @@ class ChunkViewHelper extends AbstractViewHelper
             /** @var QueryResultInterface $candidate */
             return $candidate->toArray();
         }
-        if (is_string($candidate)) {
+        if (\is_string($candidate)) {
             return GeneralUtility::trimExplode(',', $candidate, true);
         }
-        if (is_array($candidate)) {
+        if (\is_array($candidate)) {
             return $candidate;
         }
         throw new Exception('Unsupported input type; cannot convert to array!', 1588049231);

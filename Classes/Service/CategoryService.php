@@ -67,7 +67,7 @@ class CategoryService
         $resultAsArray = GeneralUtility::trimExplode(',', $result, true);
         $idListAsArray = GeneralUtility::trimExplode(',', $toBeRemoved, true);
 
-        $result = implode(',', array_diff($resultAsArray, $idListAsArray));
+        $result = implode(',', \array_diff($resultAsArray, $idListAsArray));
         return $result;
     }
 
@@ -143,7 +143,7 @@ class CategoryService
                 ->setMaxResults(1)
                 ->execute()->fetch();
 
-            if (is_array($overlayRecord) && !empty($overlayRecord)) {
+            if (\is_array($overlayRecord) && !empty($overlayRecord)) {
                 $title = $overlayRecord['title'] . ' (' . $row['title'] . ')';
             }
         }

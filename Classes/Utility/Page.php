@@ -70,7 +70,7 @@ class Page
             $register = [];
             foreach ($items as $item) {
                 $key = $prefix . ucfirst($item);
-                if (is_object($object)) {
+                if (\is_object($object)) {
                     $getter = 'get' . ucfirst($item);
                     try {
                         $value = $object->$getter();
@@ -83,7 +83,7 @@ class Page
                         $logger->warning($e->getMessage());
                     }
                 }
-                if (is_array($object)) {
+                if (\is_array($object)) {
                     $value = $object[$item];
                     $register[$key] = $value;
                 }
@@ -124,7 +124,7 @@ class Page
         // Creating top icon; the current page
         $tree->tree[] = [
             'row' => $treeStartingRecord,
-            'HTML' => is_array($treeStartingRecord) ? $iconFactory->getIconForRecord('pages', $treeStartingRecord, Icon::SIZE_SMALL)->render() : ''
+            'HTML' => \is_array($treeStartingRecord) ? $iconFactory->getIconForRecord('pages', $treeStartingRecord, Icon::SIZE_SMALL)->render() : ''
         ];
 
         $tree->getTree($pageUid, $treeLevel, '');

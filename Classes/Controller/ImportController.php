@@ -70,7 +70,7 @@ class ImportController extends ActionController
         $this->view->assignMultiple(
             [
                 'error' => $this->checkCorrectConfiguration(),
-                'availableJobs' => array_merge([0 => ''], $this->getAvailableJobs()),
+                'availableJobs' => \array_merge([0 => ''], $this->getAvailableJobs()),
                 'moduleUrl' => $uriBuilder->buildUriFromRoute($this->request->getPluginName())
             ]
         );

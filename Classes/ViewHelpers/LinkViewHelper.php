@@ -113,7 +113,7 @@ class LinkViewHelper extends AbstractTagBasedViewHelper
         // Options with stdWrap enabled won't override $tsSettings as intended here: override them explicit.
         if (isset($settings['useStdWrap']) && $settings['useStdWrap']) {
             foreach (GeneralUtility::trimExplode(',', $settings['useStdWrap'], true) as $stdWrapProperty) {
-                if (is_array($tsSettings[$stdWrapProperty]) && array_key_exists($stdWrapProperty, $settings)) {
+                if (\is_array($tsSettings[$stdWrapProperty]) && \is_array($stdWrapProperty, $settings)) {
                     $tsSettings[$stdWrapProperty] = $settings[$stdWrapProperty];
                 }
             }
@@ -226,7 +226,7 @@ class LinkViewHelper extends AbstractTagBasedViewHelper
         if (isset($tsSettings['link']['hrDate']) && $tsSettings['link']['hrDate'] == 1 || isset($tsSettings['link']['hrDate']['_typoScriptNodeValue']) && $tsSettings['link']['hrDate']['_typoScriptNodeValue'] == 1) {
             $dateTime = $newsItem->getDatetime();
 
-            if (!is_null($dateTime)) {
+            if (!\is_null($dateTime)) {
                 if (!empty($tsSettings['link']['hrDate']['day'])) {
                     $configuration['additionalParams'] .= '&tx_news_pi1[day]=' . $dateTime->format($tsSettings['link']['hrDate']['day']);
                 }

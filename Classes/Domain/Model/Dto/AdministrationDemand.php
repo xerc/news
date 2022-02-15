@@ -86,7 +86,7 @@ class AdministrationDemand extends NewsDemand
         if ($selectedCategories === '0' || $selectedCategories === ['0']) {
             return;
         }
-        if (is_string($selectedCategories)) {
+        if (\is_string($selectedCategories)) {
             $selectedCategories = explode(',', $selectedCategories);
         }
         $this->selectedCategories = $selectedCategories;

@@ -30,7 +30,7 @@ class TemplateLayout implements SingletonInterface
 
         // Check if the layouts are extended by ext_tables
         if (isset($GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['templateLayouts'])
-            && is_array($GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['templateLayouts'])
+            && \is_array($GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['templateLayouts'])
         ) {
             $templateLayouts = $GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['templateLayouts'];
         }
@@ -58,7 +58,7 @@ class TemplateLayout implements SingletonInterface
     {
         $templateLayouts = [];
         $pagesTsConfig = BackendUtility::getPagesTSconfig($pageUid);
-        if (isset($pagesTsConfig['tx_news.']['templateLayouts.']) && is_array($pagesTsConfig['tx_news.']['templateLayouts.'])) {
+        if (isset($pagesTsConfig['tx_news.']['templateLayouts.']) && \is_array($pagesTsConfig['tx_news.']['templateLayouts.'])) {
             $templateLayouts = $pagesTsConfig['tx_news.']['templateLayouts.'];
         }
         return $templateLayouts;

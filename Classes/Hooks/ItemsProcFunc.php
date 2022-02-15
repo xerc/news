@@ -73,7 +73,7 @@ class ItemsProcFunc
         $restrictions = [];
         $allLayouts = [];
         foreach ($templateLayouts as $key => $layout) {
-            if (is_array($layout[0])) {
+            if (\is_array($layout[0])) {
                 if (isset($layout[0]['allowedColPos']) && str_ends_with((string)$layout[1], '.')) {
                     $layoutKey = substr($layout[1], 0, -1);
                     $restrictions[$layoutKey] = GeneralUtility::intExplode(',', $layout[0]['allowedColPos'], true);
@@ -84,7 +84,7 @@ class ItemsProcFunc
         }
         if (!empty($restrictions)) {
             foreach ($restrictions as $restrictedIdentifier => $restrictedColPosList) {
-                if (!in_array($currentColPos, $restrictedColPosList, true)) {
+                if (!\in_array($currentColPos, $restrictedColPosList, true)) {
                     unset($allLayouts[$restrictedIdentifier]);
                 }
             }
@@ -106,7 +106,7 @@ class ItemsProcFunc
         $row = $this->getContentElementRow($config['row']['uid']);
 
         // check if the record has been saved once
-        if (is_array($row) && !empty($row['pi_flexform'])) {
+        if (\is_array($row) && !empty($row['pi_flexform'])) {
             $flexformConfig = GeneralUtility::xml2array($row['pi_flexform']);
 
             // check if there is a flexform configuration
@@ -154,10 +154,10 @@ class ItemsProcFunc
      */
     protected function removeNonValidOrderFields(array &$config, $tableName): void
     {
-        $allowedFields = array_keys($GLOBALS['TCA'][$tableName]['columns']);
+        $allowedFields = \array_keys($GLOBALS['TCA'][$tableName]['columns']);
 
         foreach ($config['items'] as $key => $item) {
-            if ($item[1] != '' && !in_array($item[1], $allowedFields)) {
+            if ($item[1] != '' && !\in_array($item[1], $allowedFields)) {
                 unset($config['items'][$key]);
             }
         }
@@ -187,7 +187,7 @@ class ItemsProcFunc
 
         // Add additional actions
         if (isset($GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['switchableControllerActions']['newItems'])
-            && is_array($GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['switchableControllerActions']['newItems'])
+            && \is_array($GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['switchableControllerActions']['newItems'])
         ) {
             foreach ($GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['switchableControllerActions']['newItems'] as $key => $label) {
                 array_push($config['items'], [$this->getLanguageService()->sL($label), $key, '']);
@@ -224,7 +224,7 @@ class ItemsProcFunc
 
         $languages = $this->getAllLanguages();
         // if any language is available
-        if (count($languages) > 0) {
+        if (\count($languages) > 0) {
             $html = '<select name="data[newsoverlay]" id="field_newsoverlay" class="form-control">
 						<option value="0">' . htmlspecialchars($this->getLanguageService()->sL('LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.default_value')) . '</option>';
 
@@ -287,7 +287,7 @@ class ItemsProcFunc
             return $pid;
         }
 
-        $row = BackendUtilityCore::getRecord('tt_content', abs($pid), 'uid,pid');
+        $row = BackendUtilityCore::getRecord('tt_content', \abs($pid), 'uid,pid');
         return $row['pid'];
     }
 

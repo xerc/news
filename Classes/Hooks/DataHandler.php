@@ -40,7 +40,7 @@ class DataHandler implements SingletonInterface
             }
 
             $cacheManager = GeneralUtility::makeInstance(CacheManager::class);
-            foreach (array_unique($this->cacheTagsToFlush) as $cacheTag) {
+            foreach (\array_unique($this->cacheTagsToFlush) as $cacheTag) {
                 $cacheManager->flushCachesInGroupByTag('pages', $cacheTag);
             }
         }
@@ -85,7 +85,7 @@ class DataHandler implements SingletonInterface
     {
         if ($table === 'tx_news_domain_model_news') {
             // check permissions of assigned categories
-            if (is_int($id) && !$this->getBackendUser()->isAdmin()) {
+            if (\is_int($id) && !$this->getBackendUser()->isAdmin()) {
                 $newsRecord = BackendUtilityCore::getRecord($table, $id);
                 if (!AccessControlService::userHasCategoryPermissionsForRecord($newsRecord)) {
                     $parentObject->log(
@@ -105,7 +105,7 @@ class DataHandler implements SingletonInterface
                     // If the category relation has been modified, no | is found anymore
                     if (isset($fieldArray['categories']) && strpos($fieldArray['categories'], '|') === false) {
                         $deniedCategories = AccessControlService::getAccessDeniedCategories($newsRecord);
-                        if (is_array($deniedCategories)) {
+                        if (\is_array($deniedCategories)) {
                             foreach ($deniedCategories as $deniedCategory) {
                                 $fieldArray['categories'] .= ',' . $deniedCategory['uid'];
                             }
@@ -133,9 +133,9 @@ class DataHandler implements SingletonInterface
      */
     public function processCmdmap_preProcess($command, &$table, $id, $value, $parentObject): void
     {
-        if ($table === 'tx_news_domain_model_news' && !$this->getBackendUser()->isAdmin() && is_int($id) && $command !== 'undelete') {
+        if ($table === 'tx_news_domain_model_news' && !$this->getBackendUser()->isAdmin() && \is_int($id) && $command !== 'undelete') {
             $newsRecord = BackendUtilityCore::getRecord($table, $id);
-            if (is_array($newsRecord) && !AccessControlService::userHasCategoryPermissionsForRecord($newsRecord)) {
+            if (\is_array($newsRecord) && !AccessControlService::userHasCategoryPermissionsForRecord($newsRecord)) {
                 $parentObject->log(
                     $table,
                     $id,

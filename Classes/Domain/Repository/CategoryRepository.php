@@ -144,7 +144,7 @@ class CategoryRepository extends AbstractDemandedRepository
         $query->getQuerySettings()->setRespectStoragePage(false);
         $query->getQuerySettings()->setRespectSysLanguage(true);
 
-        if (count($ordering) > 0) {
+        if (\count($ordering) > 0) {
             $query->setOrderings($ordering);
         }
         $this->overlayTranslatedCategoryIds($idList);
@@ -152,7 +152,7 @@ class CategoryRepository extends AbstractDemandedRepository
         $conditions = [];
         $conditions[] = $query->in('uid', $idList);
 
-        if (is_null($startingPoint) === false) {
+        if (\is_null($startingPoint) === false) {
             $conditions[] = $query->in('pid', GeneralUtility::trimExplode(',', $startingPoint, true));
         }
 
@@ -193,7 +193,7 @@ class CategoryRepository extends AbstractDemandedRepository
     {
         $language = $this->getSysLanguageUid();
         if ($language > 0 && !empty($idList)) {
-            if (isset($GLOBALS['TSFE']) && is_object($GLOBALS['TSFE'])) {
+            if (isset($GLOBALS['TSFE']) && \is_object($GLOBALS['TSFE'])) {
                 $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
                     ->getQueryBuilderForTable('sys_category');
                 $rows = $queryBuilder
@@ -222,7 +222,7 @@ class CategoryRepository extends AbstractDemandedRepository
 
         if (GeneralUtility::makeInstance(Typo3Version::class)->getMajorVersion() === 10) {
             $sysLanguage = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('language', 'id');
-        } elseif (isset($GLOBALS['TSFE']) && is_object($GLOBALS['TSFE'])) {
+        } elseif (isset($GLOBALS['TSFE']) && \is_object($GLOBALS['TSFE'])) {
             $sysLanguage = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('language', 'contentId');
         } elseif ((int)GeneralUtility::_GP('L')) {
             $sysLanguage = (int)GeneralUtility::_GP('L');
@@ -241,7 +241,7 @@ class CategoryRepository extends AbstractDemandedRepository
     protected function replaceCategoryIds(array $idList, array $rows): array
     {
         foreach ($rows as $row) {
-            $pos = array_search($row['l10n_parent'], $idList);
+            $pos = \array_search($row['l10n_parent'], $idList);
             if ($pos !== false) {
                 $idList[$pos] = (int)$row['uid'];
             }

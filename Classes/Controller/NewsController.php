@@ -233,7 +233,7 @@ class NewsController extends NewsBaseController
         if ($this->settings['disableOverrideDemand'] != 1 && $overwriteDemand !== null) {
             $demand = $this->overwriteDemandObject($demand, $overwriteDemand);
         }
-        $newsRecords = $this->newsRepository->findDemanded($demand);
+        $newsRecords = $this->newsRepository->findDemanded($demand, true, true);
 
         // pagination
         $paginationConfiguration = $this->settings['list']['paginate'] ?? [];

@@ -541,7 +541,7 @@ $tx_news_domain_model_news = [
                         ],
                     ],
                 ],
-                'allowed' => 'common-media-types',
+                'allowed' => 'common-image-types',
             ],
         ],
         'fal_related_files' => [

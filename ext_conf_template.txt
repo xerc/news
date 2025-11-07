@@ -39,7 +39,7 @@ pageTreePluginPreview = 1
 # Backend module
 
 # cat=backend module/enable/10; type=boolean; label=LLL:EXT:news/Resources/Private/Language/locallang_be.xlf:extmng.showAdministrationModule
-showAdministrationModule = 1
+showAdministrationModule = 0
 
 # cat=backend module/enable/12; type=boolean; label=LLL:EXT:news/Resources/Private/Language/locallang_be.xlf:extmng.hidePageTreeForAdministrationModule
 hidePageTreeForAdministrationModule = 0
